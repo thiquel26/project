@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      display: flex;
+      height: 100vh;
+    }
+
+    .left {
+      flex: 1;
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      margin-left: 50px;
+    }
+
+    .right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+      border: 2px solid #000;
+      height: fit-content;
+      margin-top: 100px;
+      margin-right: 150px;
+      width: 100px;
+    }
+
+    .right img {
+      width: 100%;
+      max-width: 400px;
+      object-fit: contain;
+      margin-right: 40px;
+    }
+
+    h1 {
+      font-size: 50px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+.group {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.row {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 10px;
+  width: 150px;
+  cursor: pointer;
+  gap: 10px;
+  border-radius: 15px;
+}
+
+.row2 {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 10px;
+  width: 150px;
+  cursor: pointer;
+  gap: 10px;
+  border-radius: 15px;
+}
+
+.row:hover {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+}
+
+.row2:hover {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+}
+
+@media (max-width: 1024px) {
+  body {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    height: auto;
+  }
+
+  .left {
+    margin-left: 0;
+    padding: 40px 20px;
+    align-items: center;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  .group {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .right {
+    margin: 40px 0 0;
+    border: none;
+  }
+
+  .right img {
+    margin-right: 0;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 32px;
+  }
+
+  .row,
+  .row2 {
+    width: 200px;
+    font-size: 16px;
+  }
+
+  .left {
+    padding: 30px 10px;
+  }
+
+  .right img {
+    max-width: 250px;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+  <div class="left">
+    <h1>THALIE'store</h1>
+    <div class="group">
+    <button class="row" onclick="window.location.href= 'login.html'">LOG IN</button>
+    <button class="row2" onclick="window.location.href= 'signup.html'">REGISTER</button>
+  </div>
+  </div>
+
+  <div class="right">
+    <img src="black dress.webp" alt="Dress Image" />
+  </div>
+
+</body>
+</html>

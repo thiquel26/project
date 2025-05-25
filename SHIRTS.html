@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Management</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: white;
+      color: white;
+    }
+
+    .top-nav {
+      background: linear-gradient(to right, #333, #111);
+      padding: 10px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .top-nav .logo {
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .profile-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-pic {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid white;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 52px); 
+    }
+
+    .sidebar {
+      width: 150px;
+      background-color: #f2f2f2;
+      height: 100vh;
+      padding: 20px;
+      border: 1px solid black;
+      overflow-y: auto;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar nav a {
+      text-decoration: none;
+      color: black;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar nav a:hover {
+      background-color: #000000;
+      color: white;
+    }
+
+    .sidebar nav a.active {
+      background-color: rgb(0, 0, 0);
+      color: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .main {
+      flex: 1;
+      padding: 30px;
+      background-color: white;
+      overflow-y: auto;
+      color: black;
+    }
+
+    .header {
+      font-style: italic;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .product-list {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .product {
+      background-color: gray;
+      border-radius: 10px;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(255, 255, 255, 0.712);
+      color: black;
+      min-width: 200px;
+      flex: 1 1 200px;
+    }
+
+    .product:hover {
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+    }
+
+    .product img.product-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      margin-right: 20px;
+      object-fit: cover;
+    }
+
+    nav a.active {
+      background-color: #ffffff;
+      color: black;
+      font-weight: bold;
+      border: 1px solid black;
+      border-radius: 4px;
+      box-shadow: 0 4px 6px rgba(255, 255, 255, 0.712);
+    }
+
+    .lists {
+      display: flex;
+      gap: 30px;
+      border: none;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .row {
+      background-color: gray;
+      border: 1px solid black;
+      height: 50px;
+      width: 100px;
+      border-radius: 15px;
+      text-align: center;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .row:hover {
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+    }
+
+    .row.active {
+      background-color: black;
+      color: white;
+      border: 1px solid white;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        border: none;
+        padding: 10px 0;
+        display: flex;
+        justify-content: center;
+      }
+      .sidebar nav {
+        flex-direction: row;
+        gap: 10px;
+      }
+      .sidebar nav a {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+      .main {
+        padding: 20px 15px;
+      }
+      .lists {
+        justify-content: center;
+        gap: 15px;
+      }
+      .row {
+        width: 80px;
+        height: 40px;
+        font-size: 13px;
+      }
+      .product-list {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .product {
+        padding: 20px;
+        min-width: auto;
+        flex: 1 1 auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .sidebar {
+        display: none; 
+      }
+      .top-nav {
+        padding: 10px 15px;
+      }
+      .lists {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .row {
+        width: 100%;
+        height: 45px;
+        font-size: 14px;
+        border-radius: 10px;
+      }
+      .main {
+        padding: 15px 10px;
+      }
+      .product-list {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .product {
+        padding: 15px;
+        flex: none;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <h1 class="logo">THALIE</h1>
+    <div class="profile-section">
+      <a href="prof.html">
+        <img id="userProfilePic" src="OIP.jpg" alt="User Profile" class="profile-pic">
+      </a>
+    </div>
+  </div>
+
+  <div class="container">
+    <aside class="sidebar">
+      <nav>
+        <a href="admin.html">📊 Dash Board</a>
+        <a href="product.html">🛒 Products</a>
+        <a href="suppliers.html">🏬 Suppliers</a>
+        <a href="inventory.html" class="active">📦 Inventory</a>
+        <a href="reports.html">📈 Reports</a>
+        <a href="user.html">👥 Users</a>
+        <a href="transaction.html">💰 Transactions</a> <br><br><br><br><br><br><br><br>
+        <a href="login.html">↪ Log Out</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="lists">
+        <button class="row" onclick="window.location.href= 'inventory.html'">ALL</button>
+        <button class="row active" onclick="window.location.href= 'SHIRTS.html'">T- SHIRTS</button>
+        <button class="row" onclick="window.location.href= 'HOOD.html'">HOODIE</button>
+        <button class="row" onclick="window.location.href= 'DRESSES.html'">DRESSES</button>
+        <button class="row" onclick="window.location.href= 'SKIRTS.html'">SKIRTS</button>
+      </div>
+
+      <div class="product-list">
+        <div class="product">
+          <img src="tshirt.png" alt="Classic T-Shirt" class="product-img"/>
+          <span>Classic T-Shirt - ₱450</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.row');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>

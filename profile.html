@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Settings</title>
+  <style>
+    body 
+    {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to top, #000000, #6D6768);
+      color: white;
+    }
+
+   
+    .top-nav {
+      background-color: #111;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #333;
+    }
+
+    .top-nav input[type="text"] {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      width: 190px;
+    }
+
+    .top-nav h1 {
+      font-size: 18px;
+      font-style: italic;
+      margin: 0 10px;
+    }
+
+  .container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .sidebar {
+      width: 200px;
+      background: linear-gradient(to top, #000000, #6D6768);
+      padding: 40px;
+    }
+
+    .sidebar h2 {
+      font-style: italic;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .sidebar nav a {
+      color: rgb(255, 255, 255);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: all 0.3s ease;
+      padding: 5px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .sidebar nav a:hover {
+      background-color: white;
+      color: black;
+      opacity: 2;
+      font-weight: bold;
+      border: 1px solid black;
+      box-shadow: 0 4px 6px rgba(255, 255, 255, 0.712);
+     
+    }
+    nav a.active {
+     background-color: #ffffff;
+     color: black;
+     font-weight: bold;
+     border: 1px solid black;
+     border-radius: 4px;
+     box-shadow: 0 4px 6px rgba(255, 255, 255, 0.712);
+    }
+
+
+    .main {
+      flex: 1;
+      background: linear-gradient(to bottom left, #000000, #6D6768);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .settings-card {
+      background: #2d2d2d;
+      border: 2px solid #ffffff;
+      border-top-right-radius: 100px;
+      border-bottom-left-radius: 100px;
+      padding: 50px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .settings-card img {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+
+    .settings-card small {
+      display: block;
+      color: #aaa;
+      margin: 5px 0 15px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 20px;
+      border: none;
+      font-size: 14px;
+    }
+
+    .form-group small {
+      color: #aaa;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .button-group .save-btn,
+    .button-group .logout-btn {
+      flex: 1;
+      padding: 12px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      background-color: white;
+      color: black;
+    }
+
+.button-group .save-btn:hover,
+.button-group .logout-btn:hover {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #1a1d1a;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+}
+.notification.show {
+  opacity: 1;
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 20px 15px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .sidebar nav {
+    flex-direction: row;
+    gap: 25px;
+  }
+
+  .sidebar nav a {
+    padding: 8px 12px;
+    font-size: 15px;
+  }
+
+  .main {
+    padding: 40px 20px;
+  }
+
+  .settings-card {
+    max-width: 360px;
+    padding: 40px 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    font-size: 14px;
+  }
+
+  .top-nav {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 20px;
+    align-items: flex-start;
+  }
+
+  .top-nav input[type="text"] {
+    width: 100%;
+    max-width: none;
+  }
+
+  .top-nav h1 {
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 15px 10px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #444;
+  }
+
+  .sidebar nav {
+    flex-direction: row;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .sidebar nav a {
+    font-size: 13px;
+    padding: 6px 8px;
+    white-space: nowrap;
+  }
+
+  .main {
+    padding: 20px 15px;
+  }
+
+  .settings-card {
+    max-width: 100%;
+    padding: 30px 20px;
+    border-top-right-radius: 60px;
+    border-bottom-left-radius: 60px;
+  }
+
+  .settings-card img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .form-group input {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .button-group .save-btn,
+  .button-group .logout-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <input type="text" placeholder="Search"/>
+    <h1>USER SETTINGS</h1>
+    <h1>STAFF</h1>
+  </div>
+
+  <div class="container">
+    <aside class="sidebar">
+      <nav>
+        <a href="staff.html">📦 Products</a>
+        <a href="rep.html">📊 Reports</a>
+        <a href="settings.html"class="active">⚙️ Settings</a>
+      </nav>
+    </aside>
+
+
+    <div class="main">
+      <div class="settings-card">
+        <img src="OIP.jpg" alt="Profile Photo"/>
+        <small>Edit Photo</small>
+
+        <div class="form-group">
+          <input type="text" value="Cristina Mariano" />
+          <small>Change Name</small>
+        </div>
+
+        <div class="form-group">
+          <input type="email" value="CristinaMariano@gmail.com" />
+          <small>Change Gmail</small>
+        </div>
+
+        <div class="form-group">
+          <input type="password" placeholder="Password" />
+          <small>Change Password</small>
+        </div>
+       <div class="button-group">
+       <button class="save-btn">Save</button>
+       <a href="login.html" class="logout-btn">Log Out</a>
+       </div>
+
+       <!-- Notification -->
+<div id="saveNotification" class="notification">Your Information Has been saved!</div>
+
+
+      </div>
+    </div>
+  </div>
+<script>
+  const saveBtn = document.querySelector('.save-btn');
+  const notification = document.getElementById('saveNotification');
+
+  saveBtn.addEventListener('click', () => {
+    notification.classList.add('show');
+    setTimeout(() => {
+      notification.classList.remove('show');
+    }, 3000);
+  });
+</script>
+
+</body>
+</html>

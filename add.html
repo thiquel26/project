@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Product</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: white;
+      color: white;
+    }
+
+   .top-nav {
+      background: linear-gradient(to right, #333, #111);
+      padding: 10px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .top-nav .logo {
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .profile-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-pic {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid white;
+    }
+
+     .container {
+      display: flex;
+      height: calc(100vh - 52px); 
+    }
+
+    .sidebar {
+      width: 150px;
+      background-color: #f2f2f2;
+      height: 100vh;
+      padding: 20px;
+      border: 1px solid black;
+      overflow-y: auto;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar nav a {
+      text-decoration: none;
+      color: black;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar nav a:hover {
+      background-color: #000000;
+      color: white;
+    }
+
+    .sidebar nav a.active {
+      background-color: rgb(0, 0, 0);
+      color: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+
+ .main {
+      flex: 1;
+      padding: 30px;
+      background-color: white;
+      overflow-y: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-container {
+      background-color: rgb(0, 0, 0);
+      padding: 30px;
+      border-top-right-radius: 100px;
+      border-bottom-left-radius: 100px;
+      border: 2px solid black;
+      width: 400px;
+      box-shadow: 0 4px 6px rgba(255, 255, 255, 0.712);
+      position: relative;
+      color: rgb(255, 255, 255);
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      border-radius: 15px;
+      border: none;
+      background: #fffdfd;
+      color: rgb(0, 0, 0);
+    }
+
+    textarea {
+      resize: vertical;
+      height: 80px;
+    }
+
+    .form-container button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      border-radius: 15px;
+      background: rgb(0, 0, 0);
+      color: rgb(255, 255, 255);
+      border: 1px solid white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .form-container button:hover {
+      background: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
+      border: 1px solid rgb(0, 0, 0);
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-size: 20px;
+      color: white;
+      text-decoration: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      color: #ccc;
+    }
+
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-bottom: 1px solid black;
+  }
+
+  .sidebar nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .main {
+    padding: 20px;
+  }
+
+  .form-container {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 10px;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid black;
+  }
+
+  .sidebar nav a {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .main {
+    padding: 15px;
+    align-items: flex-start;
+  }
+
+  .form-container {
+    width: 100%;
+    padding: 20px;
+    border-top-right-radius: 60px;
+    border-bottom-left-radius: 60px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    font-size: 14px;
+  }
+
+  .form-container button {
+    font-size: 14px;
+  }
+
+  .back-btn {
+    top: 10px;
+    left: 10px;
+    font-size: 18px;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <h1 class="logo">THALIE</h1>
+    <div class="profile-section">
+      <a href="prof.html">
+      <img id="userProfilePic" src="OIP.jpg" alt="User Profile" class="profile-pic">
+      </a>
+    </div>
+  </div>
+
+  <div class="container">
+    <aside class="sidebar">
+      <nav>
+        <a href="admin.html">📊 Dash Board</a>
+        <a href="product.html" class="active">🛒 Products</a>
+        <a href="suppliers.html">🏬 Suppliers</a>
+        <a href="inventory.html">📦 Inventory</a>
+        <a href="reports.html">📈 Reports</a>
+        <a href="user.html">👥 Users</a>
+        <a href="transaction.html">💰 Transactions</a> <br><br><br><br><br><br><br><br>
+        <a href="login.html">↪ Log Out</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="form-container">
+        <a href="product.html" class="back-btn">←</a>
+        <h2>Add Product</h2>
+        <form action="#" method="post">
+          <label for="productName">Product Name</label>
+          <input type="text" id="productName" name="productName" required>
+
+          <label for="productPrice">Product Price</label>
+          <input type="number" id="productPrice" name="productPrice" required>
+
+          <label for="productDescription">Product Description</label>
+          <textarea id="productDescription" name="productDescription" required></textarea>
+
+          <label for="productImage">Product Image URL</label>
+          <input type="text" id="productImage" name="productImage" required>
+
+          <button type="submit"  onclick="window.location.href='product.html'">Add Product</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

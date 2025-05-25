@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign Up</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      display: flex;
+      height: 100vh;
+      color: black;
+    }
+
+    .left {
+      flex: 1;
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      margin-left: 50px;
+    }
+
+    .right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+      border: 2px solid #000;
+      height: fit-content;
+      margin-top: 100px;
+      margin-right: 150px;
+      width: 100px;
+    }
+
+    .right img {
+      width: 100%;
+      max-width: 400px;
+      object-fit: contain;
+      margin-right: 40px;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-style: italic;
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 5px;
+      margin-top: 20px;
+    }
+
+    input, select {
+      width: 100%;
+      max-width: 300px;
+      border: none;
+      border-bottom: 2px solid #000;
+      padding: 8px 4px;
+      font-size: 16px;
+      background-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    select {
+      appearance: none;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .column {
+      flex: 1;
+      min-width: 140px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .btn {
+      margin-top: 30px;
+      width: 300px;
+      padding: 12px;
+      background-color: black;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s ease;
+      border-radius: 15px;
+    }
+
+    .btn:hover {
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+    }
+
+    .back-btn {
+      font-size: 20px;
+      color: black;
+      text-decoration: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      top: 20px;
+      left: 30px;
+    }
+
+    .back-btn:hover {
+      color: #666;
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+        height: auto;
+        padding: 20px 0;
+      }
+      .left {
+        margin-left: 0;
+        padding: 30px 20px;
+        width: 100%;
+        align-items: center;
+        text-align: center;
+      }
+      .row {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .column {
+        min-width: auto;
+        width: 100%;
+        align-items: center;
+      }
+      input, select {
+        max-width: 100%;
+        text-align: center;
+      }
+      .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+      .right {
+        margin: 40px auto 0 auto;
+        width: 90%;
+        max-width: 400px;
+        height: auto;
+        border-width: 1.5px;
+        margin-right: 0;
+        margin-top: 40px;
+      }
+      .right img {
+        margin-right: 0;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 480px) {
+      body {
+        padding: 10px 0;
+      }
+      .left {
+        padding: 20px 15px;
+      }
+      h1 {
+        font-size: 28px;
+      }
+      p {
+        font-size: 12px;
+      }
+      label {
+        font-size: 12px;
+      }
+      input, select {
+        font-size: 14px;
+      }
+      .btn {
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 12px;
+      }
+      .back-btn {
+        top: 10px;
+        left: 10px;
+        font-size: 18px;
+      }
+      .right {
+        max-width: 300px;
+        margin-top: 30px;
+        border-width: 1px;
+      }
+      .right img {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="login.html" class="back-btn">←</a>
+
+  <div class="left">
+    <h1>WELCOME</h1>
+    <p>Please enter your details</p>
+    <form onsubmit="event.preventDefault(); login();">
+      <div class="row">
+        <div class="column">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" required>
+        </div>
+        <div class="column">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column">
+          <label for="email">Email</label>
+          <input type="email" id="email" required>
+        </div>
+        <div class="column">
+          <label for="password">Create Password</label>
+          <input type="password" id="password" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column">
+          <label for="roleSelect">Select Role</label>
+          <select id="roleSelect" required>
+            <option value="" disabled selected>Select Role</option>
+            <option value="admin.html">Admin</option>
+            <option value="staff.html">Staff</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn">SIGN IN</button>
+    </form>
+  </div>
+
+  <div class="right">
+    <img src="black dress.webp" alt="Dress Image" />
+  </div>
+
+  <script>
+    function login() {
+      const lastName = document.getElementById('lastName').value.trim();
+      const firstName = document.getElementById('firstName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const role = document.getElementById('roleSelect').value;
+
+      if (!lastName || !firstName || !email || !password || !role) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      window.location.href = role;
+    }
+  </script>
+</body>
+</html>

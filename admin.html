@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: white;
+      color: white;
+    }
+
+    .top-nav {
+      background: linear-gradient(to right, #333, #111);
+      padding: 10px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .top-nav .logo {
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .profile-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-pic {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid white;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 52px); 
+    }
+
+    .sidebar {
+      width: 150px;
+      background-color: #f2f2f2;
+      height: 100vh;
+      padding: 20px;
+      border: 1px solid black;
+      overflow-y: auto;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar nav a {
+      text-decoration: none;
+      color: black;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .sidebar nav a:hover {
+      background-color: #000000;
+      color: white;
+    }
+
+    .sidebar nav a.active {
+      background-color: rgb(0, 0, 0);
+      color: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .card {
+      background: linear-gradient(to right, #333, #111);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 400px;
+      height: 40px;
+      transition: all 0.3s ease;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      color: #ffffff;
+    }
+
+    .card-value {
+      font-size: 16px;
+      margin: 5px 0;
+      color: white;
+    }
+
+    .card-growth {
+      color: #4caf50;
+      font-size: 0.9rem;
+    }
+
+    .graph {
+      grid-column: span 2;
+      background: #2a2a2a;
+      border-radius: 15px;
+      padding: 20px;
+      height: 85%;
+      color: white;
+    }
+
+    .graph h3 {
+      margin-bottom: 5px;
+    }
+
+    .bars {
+      display: flex;
+      align-items: flex-end;
+      height: 200px;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .bar {
+      width: 15%;
+      border-radius: 4px;
+    }
+
+    .bar.jan { height: 15%; background: #b22222; }
+    .bar.feb { height: 35%; background: #d4af37; }
+    .bar.mar { height: 30%; background: #4169e1; }
+    .bar.apr { height: 15%; background: #e34234; }
+    .bar.may { height: 40%; background: #00ff00; }
+    .bar.jun { height: 50%; background: #ff00ff; }
+
+    .months {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+
+    #logoutModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #logoutModal .modal-content {
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 300px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    #logoutModal button {
+      padding: 8px 16px;
+      margin: 0 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #logoutModal .yes-btn {
+      background-color: #d9534f;
+      color: white;
+    }
+
+    #logoutModal .no-btn {
+      background-color: #5bc0de;
+      color: white;
+    }
+
+    @media (max-width: 1024px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 10px 20px;
+        border-bottom: 1px solid black;
+      }
+
+      .sidebar nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .dashboard {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+      }
+
+      .graph {
+        grid-column: auto;
+        width: 100%;
+        max-width: 600px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .top-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .sidebar nav {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .dashboard {
+        grid-template-columns: 1fr;
+        padding: 15px;
+      }
+
+      .card {
+        width: 100%;
+        height: auto;
+        padding: 15px;
+      }
+
+      .graph {
+        padding: 15px;
+        font-size: 14px;
+      }
+
+      .bars {
+        height: 150px;
+        gap: 5px;
+      }
+
+      .bar {
+        width: 14%;
+      }
+
+      .months {
+        font-size: 0.7rem;
+      }
+
+      .profile-pic {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <h1 class="logo">THALIE</h1>
+    <div class="profile-section">
+      <a href="prof.html">
+        <img id="userProfilePic" src="OIP.jpg" alt="User Profile" class="profile-pic">
+      </a>
+    </div>
+  </div>
+
+  <div class="container">
+    <aside class="sidebar">
+      <nav>
+        <a href="admin.html" class="active">📊 Dash Board</a>
+        <a href="product.html">🛒 Products</a>
+        <a href="suppliers.html">🏬 Suppliers</a>
+        <a href="inventory.html">📦 Inventory</a>
+        <a href="reports.html">📈 Reports</a>
+        <a href="user.html">👥 Users</a>
+        <a href="transaction.html">💰 Transactions</a>
+        <br><br><br><br><br><br><br><br>
+        <a onclick="confirmLogout()">↪ Log Out</a>
+      </nav>
+    </aside>
+
+    <div class="dashboard">
+      <div class="card">
+        <div class="card-title">❤️ Save Products</div>
+        <div class="card-value">800</div>
+        <div class="card-growth">+8.8%</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">👜 Stock Products</div>
+        <div class="card-value">10.5k</div>
+        <div class="card-growth">+14.8%</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">₱ Daily Sales</div>
+        <div class="card-value">800</div>
+        <div class="card-growth">+8.8%</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🛍️ Total Orders</div>
+        <div class="card-value">2.3k</div>
+        <div class="card-growth">+10.8%</div>
+      </div>
+
+      <div class="graph">
+        <h3>Monitoring & Controlling</h3>
+        <small>Overview of Systems Activities and Performance</small>
+        <div class="bars">
+          <div class="bar jan"></div>
+          <div class="bar feb"></div>
+          <div class="bar mar"></div>
+          <div class="bar apr"></div>
+          <div class="bar may"></div>
+          <div class="bar jun"></div>
+        </div>
+        <div class="months">
+          <span>Jan</span><span>Feb</span><span>Mar</span>
+          <span>Apr</span><span>May</span><span>Jun</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="logoutModal">
+    <div class="modal-content">
+      <p>ARE YOU SURE YOU WANT TO LOG OUT?</p>
+      <button class="yes-btn" onclick="proceedLogout()">Yes</button>
+      <button class="no-btn" onclick="closeModal()">No</button>
+    </div>
+  </div>
+
+  <script>
+    function confirmLogout() {
+      document.getElementById("logoutModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("logoutModal").style.display = "none";
+    }
+
+    function proceedLogout() {
+      window.location.href = "login.html";
+    }
+  </script>
+
+</body>
+</html>

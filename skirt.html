@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Management</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: white;
+      color: white;
+    }
+
+    .top-nav {
+      background: linear-gradient(to right, #333, #111);
+      padding: 10px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .top-nav .logo {
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .profile-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-pic {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid white;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 52px); 
+    }
+
+    .sidebar {
+      width: 150px;
+      background-color: #f2f2f2;
+      height: 100vh;
+      padding: 20px;
+      border: 1px solid black;
+      overflow-y: auto;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar nav a {
+      text-decoration: none;
+      color: black;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar nav a:hover {
+      background-color: #000000;
+      color: white;
+    }
+
+    .sidebar nav a.active {
+      background-color: rgb(0, 0, 0);
+      color: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .main {
+      flex: 1;
+      padding: 30px;
+      background-color: white;
+      overflow-y: auto;
+      color: black;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      font-style: italic;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .product-list {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .product {
+      background-color: gray;
+      border-radius: 10px;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(255, 255, 255, 0.712);
+      color: black;
+      min-width: 200px;
+      flex: 1 1 200px;
+    }
+
+
+    .product:hover {
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+    }
+
+    .product img.product-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      margin-right: 20px;
+      object-fit: cover;
+    }
+
+    .add-button {
+      margin-top: 30px;
+      background-color: black;
+      color: white;
+      padding: 20px 30px;
+      border: 1px solid gray;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      align-self: flex-start;
+      max-width: 200px;
+    }
+
+    .add-button:hover {
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+    }
+
+    nav a.active {
+      background-color: #ffffff;
+      color: black;
+      font-weight: bold;
+      border: 1px solid black;
+      border-radius: 4px;
+      box-shadow: 0 4px 6px rgba(255, 255, 255, 0.712);
+    }
+
+    .lists {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap; 
+      margin-bottom: 30px;
+    }
+
+    .row {
+      background-color: gray;
+      border: 1px solid black;
+      height: 50px;
+      min-width: 100px;
+      border-radius: 15px;
+      text-align: center;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .row:hover {
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+    }
+
+    .row.active {
+      background-color: black;
+      color: white;
+      border: 1px solid white;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid black;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .sidebar nav {
+        flex-direction: row;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .sidebar nav a {
+        font-size: 12px;
+        padding: 8px 12px;
+        border-radius: 10px;
+      }
+
+      .main {
+        padding: 20px 15px;
+      }
+
+      .lists {
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .row {
+        width: 80px;
+        height: 40px;
+        font-size: 12px;
+      }
+
+      .product-list {
+        justify-content: center;
+      }
+
+      .product {
+        padding: 30px 20px;
+        min-width: 130px;
+        max-width: 180px;
+        font-size: 14px;
+      }
+
+      .add-button {
+        max-width: 150px;
+        padding: 15px 20px;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 480px) {
+      .top-nav {
+        padding: 10px 15px;
+      }
+
+      .top-nav .logo {
+        font-size: 20px;
+      }
+
+      .profile-pic {
+        width: 28px;
+        height: 28px;
+      }
+
+      .sidebar nav a {
+        font-size: 10px;
+        padding: 6px 8px;
+      }
+
+      .lists {
+        gap: 10px;
+      }
+
+      .row {
+        width: 70px;
+        height: 35px;
+        font-size: 10px;
+        margin-bottom: 15px;
+      }
+
+      .product {
+        padding: 20px 15px;
+        min-width: 110px;
+        max-width: 150px;
+        font-size: 12px;
+      }
+
+      .product img.product-img {
+        width: 40px;
+        height: 40px;
+        margin-right: 15px;
+      }
+
+      .add-button {
+        max-width: 130px;
+        padding: 12px 15px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <h1 class="logo">THALIE</h1>
+    <div class="profile-section">
+      <a href="prof.html">
+        <img id="userProfilePic" src="OIP.jpg" alt="User Profile" class="profile-pic">
+      </a>
+    </div>
+  </div>
+
+  <div class="container">
+    <aside class="sidebar">
+      <nav>
+        <a href="admin.html">📊 Dash Board</a>
+        <a href="product.html" class="active">🛒 Products</a>
+        <a href="suppliers.html">🏬 Suppliers</a>
+        <a href="inventory.html">📦 Inventory</a>
+        <a href="reports.html">📈 Reports</a>
+        <a href="user.html">👥 Users</a>
+        <a href="transaction.html">💰 Transactions</a> <br><br><br><br><br><br><br><br>
+        <a href="login.html">↪ Log Out</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="lists">
+        <button class="row" onclick="window.location.href= 'product.html'">ALL</button>
+        <button class="row" onclick="window.location.href= 't-shirts.html'">T- SHIRTS</button>
+        <button class="row" onclick="window.location.href= 'hoodie.html'">HOODIE</button>
+        <button class="row" onclick="window.location.href= 'dress.html'">DRESSES</button>
+        <button class="row active" onclick="window.location.href= 'skirt.html'">SKIRTS</button>
+      </div>
+
+      <div class="product-list">
+        <div class="product">
+          <img src="mini.png" alt="Maxi Skirt" class="product-img"/>
+          <span>Maxi Skirt - ₱200</span>
+        </div>
+      </div>
+
+      <button class="add-button" onclick="window.location.href= 'add.html'"> Add Product </button>
+    </main>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.row');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
